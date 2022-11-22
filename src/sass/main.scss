@@ -1,3 +1,9 @@
-h2{
-    background-color: cyan;
-}
+@import './base/resets';
+@import './page/home' ;
+@import './layouts/hero-layout';
+@import './layouts/about-section';
+@import './layouts/link-section';
+
+
+
+

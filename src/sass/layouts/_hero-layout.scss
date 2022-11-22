@@ -1,0 +1,125 @@
+
+
+.hero-section{ 
+    //position 
+    position: relative;
+
+
+    //height and width are dynamic units so this shouldnt needs mixins
+    min-width: 100vw;
+    min-height: 90vh;
+
+    //everything on this section is absolutely positioned pretty much 
+
+
+    
+    &__brackground-img{
+        position: absolute;
+        height: 90vh;
+        width: 100vw;
+        object-fit: cover;
+        filter: blur(8px);
+        -webkit-filter: blur(3px);
+        z-index: 0;
+    }
+
+    &__focus-img{
+        height: 95vh;
+        position: absolute;
+
+        left: 50%;
+        top: 47%;
+
+        transform: translate(-50% , -50%); /* the translate is based on teh size of the element 
+        essentially centering it since with the absolute positions itll be based on top left corder of the element */
+        z-index: 2;
+
+    }
+
+    &__main-title{
+        position: absolute;
+
+        left: 50%;
+        bottom: 50%;
+        z-index: 10;
+        transform: translate(-50% , -50%);
+
+        min-width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        //*JUN I feel like this might cause issue when trying to scale up or down ?
+        span{
+            font-size: 10rem;
+            margin-left: 2rem;
+        }
+
+        //*JUN how to calculate the margin in a way that doesnt break the code ? 
+        //or is this just mixin moment ?
+        .span-1{
+            color: white;
+
+            margin-right: 35rem; //only one side needs margin otherwise it might break the positioning 
+           
+        }
+        .span-2{
+            color: white;
+          
+        }
+    }
+    //the main title line 
+    &__underline-title{
+        position: absolute;
+        background-color: white;
+        width: 65vw;
+        height: 0.1rem;
+        z-index: 1;
+        left: 50%;
+        top: 43%;
+        transform: translate(-50% , -50%);
+    }
+
+    &__proffressions{ //how does font weight work exactly?
+        position: absolute;
+        z-index: 10;
+
+        bottom: 15%;
+        left: 5%;
+        font-size: 3rem;
+
+        width: 15vw;
+        
+//scss selectors weren't working for some reason **JUN
+       .prof1{
+         margin-bottom: 4rem;
+         color: white;
+
+         border-bottom: 1px solid white;
+
+         text-align: center;
+
+         padding-bottom: 1rem;
+        
+       }
+       
+
+       .prof2{
+        color: white;
+        border-bottom: 1px solid white;
+
+        text-align: center;
+        padding-bottom: 1rem;
+
+       
+       
+       }
+
+
+    }
+}
+
+
+
+
+
