@@ -1,19 +1,16 @@
-const path =require("path")
+const path = require("path")
 const express = require('express')
 const app = express()
 
 
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
-app.use(express.static('../client/dist'))
+app.use(express.static(path.join(__dirname, '../client/dist'))); //link our server to the parcel distribution folder
 
 
-// respond with "hello world" when a GET request is made to the homepage
-// app.get('/', (req, res) => {
-//   res.send('index.html')
-// })
 
+
+
+//api route goes here 
 
 
 

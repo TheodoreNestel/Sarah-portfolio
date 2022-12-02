@@ -1,10 +1,26 @@
-add logo (absolute position)
 
-react photo galery 
 
-upload form 
+Get Sarah Images on client front end 
 
-backend to handle upload / react app's assets 
+Create photo repository 
+
+Link repository to backend API so imgs can be fetched 
+    -Create function to sort through imgs and send the front end a comprehensive object with links and img type
+
+Create React Photo library component 
+    -create api call to populate img gallery 
+
+Create Form html 
+    -Form html hits back end and lets user upload an img to the photo repository with correct img typing 
+    -has a "loose" psw authentication 
+
+
+
+
+
+
+
+
 
 
 
