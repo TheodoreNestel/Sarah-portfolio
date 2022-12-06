@@ -1,0 +1,46 @@
+//this entire section is a bit wonky how would I get it to look just like on the figma balls **JUN 
+.about-section{
+
+    margin-top: 10rem;
+    height: 50vh;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    margin: 2rem 3rem;
+
+//sub divs 
+    &__sarah-img{
+       
+            height: 100%;
+            width: 30%;
+            object-fit: cover;
+        
+    }
+
+    &__about-me{
+
+        width: 60%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &__title{
+            font-size: 5rem;
+            color: #444;
+        }
+        &__about{
+            font-size: 2rem;
+            margin: 3rem 10rem 1rem;
+            text-align: center;
+            line-height: 3rem;
+            color: #444;
+        }
+        
+        
+        
+    }
+}

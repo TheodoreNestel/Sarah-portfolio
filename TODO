@@ -19,6 +19,13 @@ Create Form html
 
 
 
+??!! Node server not fetching lastest build 
+    -I figure because it just grabs whatever is in the dist file which isnt automatically updated on save... 
+    Is there a fix ? can I link the server to the parcel run script ?
+
+
+
+
 
 
 
