@@ -1,6 +1,6 @@
 {
 
-  "name": "sarah site",
+  "name": "sarah-site",
 
   "source": "src/index.html",
 
@@ -8,7 +8,9 @@
 
     "start": "parcel",
 
-    "build": " parcel build"
+    "build": " parcel build",
+
+    "serve": "php -S localhost:9000"
 
   },
 
@@ -28,7 +30,21 @@
 
     "react-dom": "^18.2.0",
 
+    "react-dropzone": "^14.2.3",
+
     "sass": "^1.56.1"
+
+  },
+
+  "targets": {
+
+    "default": {
+
+      "distDir": "./dist",
+
+      "publicUrl": "./dist"
+
+    }
 
   }
 

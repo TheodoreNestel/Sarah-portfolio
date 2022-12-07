@@ -16,12 +16,17 @@ Create Form html
 
 
 
+wire up front end form to the php files for upload
+
+react photo upload (see whats up)
 
 
 
-??!! Node server not fetching lastest build 
-    -I figure because it just grabs whatever is in the dist file which isnt automatically updated on save... 
-    Is there a fix ? can I link the server to the parcel run script ?
+ISSUES **JUN
+
+adding the additional html to the parcel dist using build didnt work I had to link it via an a tag run build
+delete the a tag then run build again for the file to show up in the dist. How do I get that to work without 
+going the cheese route by forcing parcel to parse the new html file by using an anchor tag?
 
 
 

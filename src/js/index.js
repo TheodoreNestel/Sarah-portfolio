@@ -1,5 +1,6 @@
 import * as ReactDOM from 'react-dom/client';
-import PhotoLibrary from './PhotoLibrary'
+import PhotoLibrary from './PhotoLibrary';
+import MyDropZone from './MyDropZone';
 
 
 
@@ -13,6 +14,9 @@ window.addEventListener("load",()=>{
 
    //then we call render to load our PhotoLibrary app.
    root.render(<PhotoLibrary />) //we must call this as a component 
+
+
+   
 
    
 
