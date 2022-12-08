@@ -22,15 +22,6 @@ react photo upload (see whats up)
 
 
 
-ISSUES **JUN
-
-adding the additional html to the parcel dist using build didnt work I had to link it via an a tag run build
-delete the a tag then run build again for the file to show up in the dist. How do I get that to work without 
-going the cheese route by forcing parcel to parse the new html file by using an anchor tag?
-
-
-
-
 
 
 

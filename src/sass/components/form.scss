@@ -1,0 +1,60 @@
+
+
+.dropzone-parent-main{ //i know its not cosher scss here but my brain hurt a lot right now 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.dropzone-file-spot{
+    background-color: rgb(159, 155, 155);
+    width: 66vw;
+    height: 30vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+    border: dashed 8px black;
+    border-radius: 1rem;
+
+   
+}
+
+.instructions{ //how to hover parent to transition this (what is selector for that?)
+    font-size: 2rem;
+    color: white;
+
+    &:hover{
+        color: rgb(109, 109, 227);
+    }
+
+    transition: 0.3s ;
+}
+
+
+.main-dropzone{ //html structure is weird so its not doing exactly what I want but its usable so good enoug 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+
+
+    &__img{
+        height: 10%;
+        width: 5%;
+    }
+
+    &__radioButtons{
+        display: flex;
+        gap: 0.5rem;
+    }
+}

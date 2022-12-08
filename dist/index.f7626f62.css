@@ -145,4 +145,52 @@ html {
   font-size: 5rem;
 }
 
+.dropzone-parent-main {
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  display: flex;
+}
+
+.dropzone-file-spot {
+  width: 66vw;
+  height: 30vh;
+  background-color: #9f9b9b;
+  border: 8px dashed #000;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.instructions {
+  color: #fff;
+  font-size: 2rem;
+  transition: all .3s;
+}
+
+.instructions:hover {
+  color: #6d6de3;
+}
+
+.main-dropzone {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.main-dropzone__img {
+  height: 10%;
+  width: 5%;
+}
+
+.main-dropzone__radioButtons {
+  gap: .5rem;
+  display: flex;
+}
+
 /*# sourceMappingURL=index.f7626f62.css.map */

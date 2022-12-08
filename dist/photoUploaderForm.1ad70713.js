@@ -2039,13 +2039,13 @@ process.umask = function() {
     return 0;
 };
 
-},{}],"dNKx6":[function(require,module,exports) {
+},{}],"8grYg":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "ba60c367739bf03c";
+module.bundle.HMR_BUNDLE_ID = "0c44baa91ad70713";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -2428,71 +2428,35 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"ebWYT":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$6ce0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"dqrSR":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5dd4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$6ce0.prelude(module);
+$parcel$ReactRefreshHelpers$5dd4.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
-var _photoLibrary = require("./PhotoLibrary");
-var _photoLibraryDefault = parcelHelpers.interopDefault(_photoLibrary);
 var _myDropZone = require("./MyDropZone");
 var _myDropZoneDefault = parcelHelpers.interopDefault(_myDropZone);
-//this mounts our react app to our index.html 
 window.addEventListener("load", ()=>{
     //we anchor the react app to the container alocated for it in our html structure
-    const root = _client.createRoot(document.querySelector("#react-root"));
+    const root = _client.createRoot(document.querySelector("#uploadReactFormRoot"));
     //then we call render to load our PhotoLibrary app.
-    root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _photoLibraryDefault.default), {}, void 0, false, {
-        fileName: "src/js/index.js",
-        lineNumber: 16,
+    root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _myDropZoneDefault.default), {}, void 0, false, {
+        fileName: "src/js/uploadFormIndex.js",
+        lineNumber: 13,
         columnNumber: 16
     }, undefined)) //we must call this as a component 
     ;
-///Other scripts go down here///
-}) ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-;
+});
 
-  $parcel$ReactRefreshHelpers$6ce0.postlude(module);
+  $parcel$ReactRefreshHelpers$5dd4.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./PhotoLibrary":"T05jJ","./MyDropZone":"6LKyu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"T05jJ":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$7d92 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$7d92.prelude(module);
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./MyDropZone":"6LKyu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["1xC6H","8grYg","dqrSR"], "dqrSR", "parcelRequire0188")
 
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-function PhotoLibrary() {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-        children: "I am a react component very cool :)"
-    }, void 0, false, {
-        fileName: "src/js/PhotoLibrary.js",
-        lineNumber: 13,
-        columnNumber: 9
-    }, this);
-}
-_c = PhotoLibrary;
-exports.default = PhotoLibrary;
-var _c;
-$RefreshReg$(_c, "PhotoLibrary");
-
-  $parcel$ReactRefreshHelpers$7d92.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["1xC6H","dNKx6","ebWYT"], "ebWYT", "parcelRequire0188")
-
-//# sourceMappingURL=index.739bf03c.js.map
+//# sourceMappingURL=photoUploaderForm.1ad70713.js.map
