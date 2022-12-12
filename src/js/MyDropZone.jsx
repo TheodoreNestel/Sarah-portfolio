@@ -2,6 +2,8 @@ import React , {useCallback , useState} from "react";
 
 import {useDropzone} from 'react-dropzone'
 
+import axios from "axios"
+
 
 
 
@@ -9,8 +11,47 @@ import {useDropzone} from 'react-dropzone'
 function MyDropZone(){
 
 
+
+
+
+
     const [imgList , setImgList] = useState([])
     const [psw , setPsw] = useState()
+
+
+
+    const  handleSubmit = async () => {
+        
+        const myForm = new FormData()
+
+
+
+        imgList.forEach((imgObj , i)=>{
+            myForm.append(`files[${i}]` , imgObj.file)
+        })
+        
+       const imgMeta = imgList.map((imgObj , i)=>{
+          return  {
+                id : imgObj.id,
+                type : imgObj.type
+            }
+        })
+
+        myForm.append("meta", JSON.stringify(imgMeta)) 
+
+        myForm.append("psw" , psw)
+
+        //axios logic
+
+       const res = await axios.post('/upload' , myForm , {
+            headers : {
+                "Content-Type" : "multipart/form-data"
+            }
+        })
+
+        console.log(res)
+
+    }
 
 
 
@@ -83,13 +124,13 @@ function MyDropZone(){
                             }
     
                             return (
-                               <div className="main-dropzone">
+                               <div className="main-dropzone"key={img.id} >
 
 
                                     <img
                                     className="main-dropzone__img"
                                     src={URL.createObjectURL(img.file)}
-                                    key={img.id}
+                                    
                                     />
 
 
@@ -142,9 +183,9 @@ function MyDropZone(){
                     {
                         !!imgList.length && (
                             <div className="pseudo-psw-submit-section">
-                                <input placeholder="Password" type="text" value={psw} onChange={(e)=> setPsw(e.target.value)}/>
+                                <input placeholder="Password" type="password" value={psw} onChange={(e)=> setPsw(e.target.value)}/>
 
-                               {!!psw && <button>Submit</button>} 
+                               {!!psw && <button onClick={handleSubmit}>Submit</button>} 
                             </div>
                         )
                     }

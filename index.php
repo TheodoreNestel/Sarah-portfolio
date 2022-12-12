@@ -2,6 +2,7 @@
  
 // Require the class
 include 'Route.php';
+include 'upload.php';
  
 // Use this namespace
 use Steampixel\Route;
@@ -28,7 +29,9 @@ Route::add('/admin', function() {
 
 Route::add('/upload', function() {
     //write function that runs the upload file 
-});
+   return uploadImg();
+
+}, "post");
  
 // 404 ROUTE
  
