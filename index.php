@@ -23,6 +23,14 @@ Route::add('/admin', function() {
 
 //Get photo route
 
+Route::add('/photos', function() {
+    $response = new stdClass();
+    $files = array_diff(scandir(__DIR__ . '/uploads'), array('.', '..'));
+
+    $response->data = $files;
+
+    return json_encode($response);
+});
  
 
 //post photo route

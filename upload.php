@@ -4,7 +4,7 @@ function uploadImg(){
   
   $response = new stdClass();
 
-  $response->status = "Failed :(";
+//   $response->status = "Failed :(";
 
 
   if(!isset($_POST["psw"])){
@@ -19,7 +19,13 @@ function uploadImg(){
 
 
   $arr = array();
-
+  $meta = json_decode($_POST["meta"]);
+  $upload_dir = 'uploads'.DIRECTORY_SEPARATOR;
+  $allowed_types = array('jpg', 'png', 'jpeg', 'gif');
+  $valid_upload = FALSE;
+   
+  // Define maxsize for files i.e 2MB
+  $maxsize = 4 * 1024 * 1024;
 
 
 
@@ -34,57 +40,47 @@ function uploadImg(){
 			$file_size = $_FILES['files']['size'][$key];
 			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-      array_push($arr, $file_name);
+      array_push($arr, $file_name . " type : " . $meta[$key]->type);
 
 			// Set upload file path
-			//$filepath = $upload_dir.$file_name;
+			$filepath = $upload_dir.$file_name;
 
-			// Check file type is allowed or not
-			// if(in_array(strtolower($file_ext), $allowed_types)) {
+			//Check file type is allowed or not
+			if(in_array(strtolower($file_ext), $allowed_types)) {
 
-			// 	// Verify file size - 2MB max
-			// 	if ($file_size > $maxsize)		
-			// 		echo "Error: File size is larger than the allowed limit.";
+				// Verify file size - 2MB max
+				if ($file_size > $maxsize){
 
-			// 	// If file with name already exist then append time in
-			// 	// front of name of the file to avoid overwriting of file
-			// 	if(file_exists($filepath)) {
-			// 		$filepath = $upload_dir.time().$file_name;
-					
-			// 		if( move_uploaded_file($file_tmpname, $filepath)) {
-			// 			echo "{$file_name} successfully uploaded <br />";
-			// 		}
-			// 		else {					
-			// 			echo "Error uploading {$file_name} <br />";
-			// 		}
-			// 	}
-			// 	else {
+						$response->message = "Error: File size is larger than the allowed limit.";
+						
+					}
+}
+				// If file with name already exist then append time in
+				// front of name of the file to avoid overwriting of file
+
+				$filepath = $upload_dir . $meta[$key]->type . "__" . time() . "-" . $file_name;
+
+				if( !move_uploaded_file($file_tmpname, $filepath)){
+					$response->message = "Error uploading {$file_name}.";
+				}
+				else {
+				// If file extension not valid
+				$response->message = "Error uploading {$file_name}type is not valid .";
+				}
 				
-			// 		if( move_uploaded_file($file_tmpname, $filepath)) {
-			// 			echo "{$file_name} successfully uploaded <br />";
-			// 		}
-			// 		else {					
-			// 			echo "Error uploading {$file_name} <br />";
-			// 		}
-			// 	}
-			// }
-			// else {
-				
-			// 	// If file extension not valid
-			// 	echo "Error uploading {$file_name} ";
-			// 	echo "({$file_ext} file type is not allowed)<br / >";
-			// }
 		}
 	}
 	
 
 
 
+	$files = array_diff(scandir(__DIR__ . '/uploads'), array('.', '..'));
+  
+    $response->names = $arr;
+	$response->photos = $files;
 
-  
-   $response->names = $arr;
-  
   return json_encode($response);
+
   
 
 

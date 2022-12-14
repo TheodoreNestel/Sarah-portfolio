@@ -30,11 +30,15 @@
 
     "axios": "^1.2.1",
 
+    "photoswipe": "^5.3.4",
+
     "react": "^18.2.0",
 
     "react-dom": "^18.2.0",
 
     "react-dropzone": "^14.2.3",
+
+    "react-photoswipe-gallery": "^2.2.2",
 
     "sass": "^1.56.1"
 

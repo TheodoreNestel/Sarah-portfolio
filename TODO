@@ -22,7 +22,13 @@ react photo upload (see whats up)
 
 
 
+//TUESDAY 
 
+issues 
+    -no client side error for img size 
+    -no client notification when post is in progress 
+    -items arent cleared from array after the post is successfull 
+    -no option to remove a file once its been committed 
 
 
 

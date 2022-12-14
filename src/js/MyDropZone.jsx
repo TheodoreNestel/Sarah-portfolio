@@ -26,6 +26,8 @@ function MyDropZone(){
 
 
 
+
+
         imgList.forEach((imgObj , i)=>{
             myForm.append(`files[${i}]` , imgObj.file)
         })
@@ -49,7 +51,17 @@ function MyDropZone(){
             }
         })
 
-        console.log(res)
+        console.log(Object.values(res.data.photos).map((fileName)=>{
+            return `/uploads/${fileName}`
+        }))
+
+        //real path would be uploads/filename from object 
+        
+
+        //TEST CODE - remove all items from imglist when submited 
+
+        setImgList([]) //this works but is a little jarring Xp 
+        
 
     }
 
@@ -181,13 +193,13 @@ function MyDropZone(){
                     }
 
                     {
-                        !!imgList.length && (
+                        
                             <div className="pseudo-psw-submit-section">
                                 <input placeholder="Password" type="password" value={psw} onChange={(e)=> setPsw(e.target.value)}/>
 
                                {!!psw && <button onClick={handleSubmit}>Submit</button>} 
                             </div>
-                        )
+                        
                     }
 
             </div>
