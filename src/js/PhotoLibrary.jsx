@@ -77,10 +77,11 @@ function PhotoLibrary(){
     return (
        <>
        {
-       <Gallery classname="wowow">
+        <div className="react-photo-library__photo-section">
+       <Gallery>
         {
             
-            imgs.map((img)=>{
+            imgs.map((img , i)=>{
 
                 if(typeOfImg == img.type || typeOfImg === "all"){ //this will grab all the imgs that
                     return (
@@ -89,6 +90,7 @@ function PhotoLibrary(){
                         thumbnail={img.img}
                         width="1024"
                         height="768"
+                        key={Date.now() +i}
                         >
                             {({ ref, open }) => (
                                  <img ref={ref} onClick={open} src={img.img} />
@@ -100,9 +102,10 @@ function PhotoLibrary(){
             })
         }
        </Gallery>
+       </div>
        }
 
-       <div className="img-sorting-radio">
+       <div className="react-photo-library__img-sorting-radio">
 
         <input
         className="img-sorting-radio__button"

@@ -5,11 +5,15 @@ import {useDropzone} from 'react-dropzone'
 import axios from "axios"
 
 
-
+//max size that our back lets us upload : 4194304 bytes// 4mb 
 
 
 function MyDropZone(){
 
+
+    //file error checking variables 
+    const maxFileSize = 4194304;
+    let problemFiles = 0;
 
 
 
@@ -20,15 +24,24 @@ function MyDropZone(){
 
 
 
+
     const  handleSubmit = async () => {
+
+
+        //basic error checking if there are no files return our of the handlesubmit
+        if(imgList.length <= 0){
+            alert("Nothing to Upload. Please add files to be uploaded")
+            return
+        }
         
         const myForm = new FormData()
 
+        //if the img is smaller than our maxFile size keep it in
+        const sizeCheckedArr =imgList.filter((img)=> img.file.size < maxFileSize) 
 
-
-
-
-        imgList.forEach((imgObj , i)=>{
+        
+        //using the sized checked arr instead of img list *****
+        sizeCheckedArr.forEach((imgObj , i)=>{
             myForm.append(`files[${i}]` , imgObj.file)
         })
         
@@ -43,23 +56,18 @@ function MyDropZone(){
 
         myForm.append("psw" , psw)
 
-        //axios logic
+        //axios logic **JUN more error handling needed here I think
 
+        console.log(myForm , "were file?")
        const res = await axios.post('/upload' , myForm , {
             headers : {
                 "Content-Type" : "multipart/form-data"
             }
         })
 
-        console.log(Object.values(res.data.photos).map((fileName)=>{
-            return `/uploads/${fileName}`
-        }))
 
-        //real path would be uploads/filename from object 
-        
-
-        //TEST CODE - remove all items from imglist when submited 
-
+        alert("Files uploaded")
+       
         setImgList([]) //this works but is a little jarring Xp 
         
 
@@ -71,11 +79,17 @@ function MyDropZone(){
         //do something with files. In our case a post request to our backend after basic pswd and files validation
 
         setImgList([...imgList , ...acceptedFiles.map((file , i)=>{
-            return {
-                file,
-                type : "both",
-                id : Date.now() + i
-            }
+
+            
+                return {
+                    file,
+                    type : "both",
+                    id : Date.now() + i,
+                    size : file.size
+                }
+
+            
+           
         })])
 
        
@@ -136,17 +150,25 @@ function MyDropZone(){
                             }
     
                             return (
-                               <div className="main-dropzone"key={img.id} >
+                               <div
+                               className="main-dropzone"
+                               key={img.id}>
+
 
 
                                     <img
-                                    className="main-dropzone__img"
+                                    className={`main-dropzone__img ${img.size > maxFileSize ? "too-big" : ""}`}
                                     src={URL.createObjectURL(img.file)}
                                     
                                     />
 
+                                    {img.size > maxFileSize ? <h4 style={{color:'red'}}>File is too large and will not be uploaded.</h4> : ""}
 
-                                <div className="main-dropzone__radioButtons">
+                                
+                                <div
+                                className={`main-dropzone__radioButtons ${img.size > maxFileSize ? "too-big-radio" : ""}`}
+                                >
+                                  
                                         <label className="main-dropzone__radio-label">
                                             <input 
                                                 type="radio"

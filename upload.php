@@ -24,7 +24,7 @@ function uploadImg(){
   $allowed_types = array('jpg', 'png', 'jpeg', 'gif');
   $valid_upload = FALSE;
    
-  // Define maxsize for files i.e 2MB
+  // Define maxsize for files i.e 2MB //this shits out a byte value
   $maxsize = 4 * 1024 * 1024;
 
 

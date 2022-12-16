@@ -32,4 +32,22 @@ issues
 
 
 
+    TODO // 
+        -Submited message when a post request is sucessfull 
+        -Error handling on the back end since right now we just get silence on the back end if stuff fails 
+
+
+
+
+//BUGS 
+    -upload not always working. No errors sent on either front or backend in that case
+    -seems to be a file type error svgs are being uploaded even though they arent supposed to be
+    -some file that are legal are just not being uploaded no error message given 
+        ie: I have a legal jpeg correct size and file type that doesnt uploaded for some reason
+
+
+
+
+//
+
 

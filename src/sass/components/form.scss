@@ -45,16 +45,27 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    
+
+   
 
 
     &__img{
         height: 10%;
         width: 5%;
+
+       
+       
     }
 
     &__radioButtons{
         display: flex;
         gap: 0.5rem;
     }
+}
+
+.too-big{
+   filter: grayscale(90%);
+}
+.too-big-radio{
+    display: none;
 }

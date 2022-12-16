@@ -2522,36 +2522,42 @@ function PhotoLibrary() {
     //sorting between both  makeup and hair 
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactPhotoswipeGallery.Gallery), {
-                classname: "wowow",
-                children: imgs.map((img)=>{
-                    if (typeOfImg == img.type || typeOfImg === "all") return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactPhotoswipeGallery.Item), {
-                        original: img.img,
-                        thumbnail: img.img,
-                        width: "1024",
-                        height: "768",
-                        children: ({ ref , open  })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                ref: ref,
-                                onClick: open,
-                                src: img.img
-                            }, void 0, false, {
-                                fileName: "src/js/PhotoLibrary.jsx",
-                                lineNumber: 94,
-                                columnNumber: 34
-                            }, this)
-                    }, void 0, false, {
-                        fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 87,
-                        columnNumber: 25
-                    }, this);
-                })
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "react-photo-library__photo-section",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactPhotoswipeGallery.Gallery), {
+                    children: imgs.map((img, i)=>{
+                        if (typeOfImg == img.type || typeOfImg === "all") return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactPhotoswipeGallery.Item), {
+                            original: img.img,
+                            thumbnail: img.img,
+                            width: "1024",
+                            height: "768",
+                            children: ({ ref , open  })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                    ref: ref,
+                                    onClick: open,
+                                    src: img.img
+                                }, void 0, false, {
+                                    fileName: "src/js/PhotoLibrary.jsx",
+                                    lineNumber: 96,
+                                    columnNumber: 34
+                                }, this)
+                        }, Date.now() + i, false, {
+                            fileName: "src/js/PhotoLibrary.jsx",
+                            lineNumber: 88,
+                            columnNumber: 25
+                        }, this);
+                    })
+                }, void 0, false, {
+                    fileName: "src/js/PhotoLibrary.jsx",
+                    lineNumber: 81,
+                    columnNumber: 8
+                }, this)
             }, void 0, false, {
                 fileName: "src/js/PhotoLibrary.jsx",
                 lineNumber: 80,
-                columnNumber: 8
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "img-sorting-radio",
+                className: "react-photo-library__img-sorting-radio",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         className: "img-sorting-radio__button",
@@ -2562,7 +2568,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 107,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2571,7 +2577,7 @@ function PhotoLibrary() {
                         children: "Both"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 115,
+                        lineNumber: 118,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2583,7 +2589,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 117,
+                        lineNumber: 120,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2592,7 +2598,7 @@ function PhotoLibrary() {
                         children: "Makeup"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 125,
+                        lineNumber: 128,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2604,7 +2610,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 127,
+                        lineNumber: 130,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2613,7 +2619,7 @@ function PhotoLibrary() {
                         children: "Hairstyles"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 135,
+                        lineNumber: 138,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2625,7 +2631,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 139,
+                        lineNumber: 142,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2634,13 +2640,13 @@ function PhotoLibrary() {
                         children: "All"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 147,
+                        lineNumber: 150,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/js/PhotoLibrary.jsx",
-                lineNumber: 105,
+                lineNumber: 108,
                 columnNumber: 8
             }, this)
         ]

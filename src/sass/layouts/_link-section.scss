@@ -1,8 +1,51 @@
 .footer-links{
-    margin-top: 10rem;
+    margin-top: 5rem;
+
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     &__title{
         color: #444;
         font-size: 5rem;
     }
+
+    &__div{
+       
+
+        width: 33vw;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin:   2rem 0 3rem 0;
+
+        
+        &__links{
+        
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: 4rem;
+
+            
+
+           
+            
+
+
+            &__img{
+               
+                width: 3vw;
+            }
+           
+        }
+    }
+
+   
 }
