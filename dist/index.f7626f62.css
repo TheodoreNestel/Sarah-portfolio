@@ -25,14 +25,14 @@ html {
   height: 90vh;
   width: 100vw;
   object-fit: cover;
-  filter: blur(8px);
-  -webkit-filter: blur(3px);
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
   z-index: 0;
   position: absolute;
 }
 
 .hero-section__focus-img {
-  height: 95vh;
+  height: 70vh;
   z-index: 2;
   position: absolute;
   top: 47%;
@@ -112,6 +112,7 @@ html {
   height: 100%;
   width: 30%;
   object-fit: cover;
+  box-shadow: 5px 4px 8px #00000042;
 }
 
 .about-section__about-me {
@@ -161,7 +162,12 @@ html {
   justify-content: center;
   align-items: center;
   margin: 4rem;
+  transition: all .2s linear;
   display: flex;
+}
+
+.footer-links__div__links:hover {
+  transform: scale(1.2);
 }
 
 .footer-links__div__links__img {

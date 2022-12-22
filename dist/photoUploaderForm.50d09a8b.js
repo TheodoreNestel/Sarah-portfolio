@@ -30117,13 +30117,25 @@ var _reactDropzone = require("react-dropzone");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
+//max size that our back lets us upload : 4194304 bytes// 4mb 
 function MyDropZone() {
     _s();
+    //file error checking variables 
+    const maxFileSize = 4194304;
+    let problemFiles = 0;
     const [imgList, setImgList] = (0, _react.useState)([]);
     const [psw, setPsw] = (0, _react.useState)();
     const handleSubmit = async ()=>{
+        //basic error checking if there are no files return our of the handlesubmit
+        if (imgList.length <= 0) {
+            alert("Nothing to Upload. Please add files to be uploaded");
+            return;
+        }
         const myForm = new FormData();
-        imgList.forEach((imgObj, i)=>{
+        //if the img is smaller than our maxFile size keep it in
+        const sizeCheckedArr = imgList.filter((img)=>img.file.size < maxFileSize);
+        //using the sized checked arr instead of img list *****
+        sizeCheckedArr.forEach((imgObj, i)=>{
             myForm.append(`files[${i}]`, imgObj.file);
         });
         const imgMeta = imgList.map((imgObj, i)=>{
@@ -30134,17 +30146,14 @@ function MyDropZone() {
         });
         myForm.append("meta", JSON.stringify(imgMeta));
         myForm.append("psw", psw);
-        //axios logic
+        //axios logic **JUN more error handling needed here I think
         const res = await (0, _axiosDefault.default).post("/upload", myForm, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         });
-        console.log(Object.values(res.data.photos).map((fileName)=>{
-            return `/uploads/${fileName}`;
-        }));
-        //real path would be uploads/filename from object 
-        //TEST CODE - remove all items from imglist when submited 
+        console.log(res);
+        alert("Files uploaded");
         setImgList([]) //this works but is a little jarring Xp 
         ;
     };
@@ -30156,7 +30165,8 @@ function MyDropZone() {
                 return {
                     file,
                     type: "both",
-                    id: Date.now() + i
+                    id: Date.now() + i,
+                    size: file.size
                 };
             })
         ]);
@@ -30181,7 +30191,7 @@ function MyDropZone() {
                         className: "dropzone-file-explorer"
                     }, void 0, false, {
                         fileName: "src/js/MyDropZone.jsx",
-                        lineNumber: 93,
+                        lineNumber: 109,
                         columnNumber: 17
                     }, this),
                     isDragActive ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -30189,20 +30199,20 @@ function MyDropZone() {
                         children: "Drop Files here"
                     }, void 0, false, {
                         fileName: "src/js/MyDropZone.jsx",
-                        lineNumber: 96,
+                        lineNumber: 112,
                         columnNumber: 25
                     }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "instructions",
                         children: "click here to open file explorer or drag items in the box"
                     }, void 0, false, {
                         fileName: "src/js/MyDropZone.jsx",
-                        lineNumber: 98,
+                        lineNumber: 114,
                         columnNumber: 25
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/js/MyDropZone.jsx",
-                lineNumber: 92,
+                lineNumber: 108,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -30225,15 +30235,25 @@ function MyDropZone() {
                             className: "main-dropzone",
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                    className: "main-dropzone__img",
+                                    className: `main-dropzone__img ${img.size > maxFileSize ? "too-big" : ""}`,
                                     src: URL.createObjectURL(img.file)
                                 }, void 0, false, {
                                     fileName: "src/js/MyDropZone.jsx",
-                                    lineNumber: 142,
+                                    lineNumber: 161,
                                     columnNumber: 37
                                 }, this),
+                                img.size > maxFileSize && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
+                                    style: {
+                                        color: "red"
+                                    },
+                                    children: "File is too large and will not be uploaded."
+                                }, void 0, false, {
+                                    fileName: "src/js/MyDropZone.jsx",
+                                    lineNumber: 167,
+                                    columnNumber: 66
+                                }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: "main-dropzone__radioButtons",
+                                    className: `main-dropzone__radioButtons ${img.size > maxFileSize && "too-big-radio"}`,
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                             className: "main-dropzone__radio-label",
@@ -30247,20 +30267,20 @@ function MyDropZone() {
                                                     className: "main-dropzone__radio-input"
                                                 }, void 0, false, {
                                                     fileName: "src/js/MyDropZone.jsx",
-                                                    lineNumber: 151,
+                                                    lineNumber: 175,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     children: "Hair"
                                                 }, void 0, false, {
                                                     fileName: "src/js/MyDropZone.jsx",
-                                                    lineNumber: 159,
+                                                    lineNumber: 183,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/js/MyDropZone.jsx",
-                                            lineNumber: 150,
+                                            lineNumber: 174,
                                             columnNumber: 41
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -30275,20 +30295,20 @@ function MyDropZone() {
                                                     className: "main-dropzone__radio-input"
                                                 }, void 0, false, {
                                                     fileName: "src/js/MyDropZone.jsx",
-                                                    lineNumber: 164,
+                                                    lineNumber: 188,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     children: "Makeup"
                                                 }, void 0, false, {
                                                     fileName: "src/js/MyDropZone.jsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 196,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/js/MyDropZone.jsx",
-                                            lineNumber: 163,
+                                            lineNumber: 187,
                                             columnNumber: 41
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -30303,32 +30323,32 @@ function MyDropZone() {
                                                     className: "main-dropzone__radio-input"
                                                 }, void 0, false, {
                                                     fileName: "src/js/MyDropZone.jsx",
-                                                    lineNumber: 177,
+                                                    lineNumber: 201,
                                                     columnNumber: 45
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     children: "Both"
                                                 }, void 0, false, {
                                                     fileName: "src/js/MyDropZone.jsx",
-                                                    lineNumber: 185,
+                                                    lineNumber: 209,
                                                     columnNumber: 45
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/js/MyDropZone.jsx",
-                                            lineNumber: 176,
+                                            lineNumber: 200,
                                             columnNumber: 41
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/js/MyDropZone.jsx",
-                                    lineNumber: 149,
+                                    lineNumber: 170,
                                     columnNumber: 33
                                 }, this)
                             ]
                         }, img.id, true, {
                             fileName: "src/js/MyDropZone.jsx",
-                            lineNumber: 139,
+                            lineNumber: 155,
                             columnNumber: 32
                         }, this);
                     }),
@@ -30342,7 +30362,7 @@ function MyDropZone() {
                                 onChange: (e)=>setPsw(e.target.value)
                             }, void 0, false, {
                                 fileName: "src/js/MyDropZone.jsx",
-                                lineNumber: 198,
+                                lineNumber: 222,
                                 columnNumber: 33
                             }, this),
                             !!psw && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -30350,25 +30370,25 @@ function MyDropZone() {
                                 children: "Submit"
                             }, void 0, false, {
                                 fileName: "src/js/MyDropZone.jsx",
-                                lineNumber: 200,
+                                lineNumber: 224,
                                 columnNumber: 42
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/js/MyDropZone.jsx",
-                        lineNumber: 197,
+                        lineNumber: 221,
                         columnNumber: 29
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/js/MyDropZone.jsx",
-                lineNumber: 112,
+                lineNumber: 128,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/js/MyDropZone.jsx",
-        lineNumber: 90,
+        lineNumber: 106,
         columnNumber: 9
     }, this);
 } //is dragactive checks if a file drag is in process and displays text differently based on that.

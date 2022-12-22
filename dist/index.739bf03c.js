@@ -2486,6 +2486,8 @@ function PhotoLibrary() {
     const [imgs, setImgs] = (0, _react.useState)([]);
     //state for keeping track of how to sort imgs 
     const [typeOfImg, setTypeOfImg] = (0, _react.useState)("all"); //starts as both so all imgs are loaded / rendered initially
+    const [loading, setLoading] = (0, _react.useState)(true) // are we loading imgs 
+    ;
     //axios logic
     //this function gets the imgs in our backend then formats them into a new object with the type of the img 
     //and the img itself 
@@ -2494,16 +2496,25 @@ function PhotoLibrary() {
         const res = await (0, _axiosDefault.default).get("/photos");
         //grab just the values from the array the backend returns
         const arrOfImgs = Object.values(res.data.data);
-        //formats the entries into new objects containing a file path and the type of img in two separate keys
-        const sortedArrOfImgs = arrOfImgs.map((img)=>{
-            const imgType = img.substring(0, img.indexOf("__"));
-            return {
-                type: imgType,
-                img: `uploads/${img}`
-            };
-        });
+        const sortImgsWithSize = new Array(arrOfImgs.length);
+        const cachedImgs = arrOfImgs.map((img, i)=>new Promise((resolve)=>{
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    sortImgsWithSize[i] = {
+                        width: this.width,
+                        height: this.height,
+                        type: img.split("__")[0],
+                        img: `uploads/${img}`
+                    };
+                    resolve();
+                };
+                tempImg.src = `uploads/${img}`;
+            }));
+        await Promise.all(cachedImgs);
+        console.log(sortImgsWithSize);
+        setLoading(false);
         //then once our array of objects is ready we set it to state 
-        setImgs(sortedArrOfImgs);
+        setImgs(sortImgsWithSize);
     }
     //getImgs(); //this runs forever so we need to call it just once 
     //useEffect here with an empty dependency array because we want our get request to only run once 
@@ -2513,6 +2524,7 @@ function PhotoLibrary() {
     }, []);
     //handle radio button state change for the sake of sorting 
     function handleChange(e) {
+        if (!e.target.checked) return;
         let type = e.target.value;
         //console.log(type)
         setTypeOfImg(type);
@@ -2522,39 +2534,45 @@ function PhotoLibrary() {
     //sorting between both  makeup and hair 
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            !loading ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "react-photo-library__photo-section",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactPhotoswipeGallery.Gallery), {
                     children: imgs.map((img, i)=>{
                         if (typeOfImg == img.type || typeOfImg === "all") return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactPhotoswipeGallery.Item), {
                             original: img.img,
                             thumbnail: img.img,
-                            width: "1024",
-                            height: "768",
+                            width: img.width,
+                            height: img.height,
                             children: ({ ref , open  })=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                     ref: ref,
                                     onClick: open,
                                     src: img.img
                                 }, void 0, false, {
                                     fileName: "src/js/PhotoLibrary.jsx",
-                                    lineNumber: 96,
+                                    lineNumber: 117,
                                     columnNumber: 34
                                 }, this)
                         }, Date.now() + i, false, {
                             fileName: "src/js/PhotoLibrary.jsx",
-                            lineNumber: 88,
+                            lineNumber: 109,
                             columnNumber: 25
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "src/js/PhotoLibrary.jsx",
-                    lineNumber: 81,
+                    lineNumber: 102,
                     columnNumber: 8
                 }, this)
             }, void 0, false, {
                 fileName: "src/js/PhotoLibrary.jsx",
-                lineNumber: 80,
-                columnNumber: 9
+                lineNumber: 101,
+                columnNumber: 10
+            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "Loading"
+            }, void 0, false, {
+                fileName: "src/js/PhotoLibrary.jsx",
+                lineNumber: 126,
+                columnNumber: 18
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "react-photo-library__img-sorting-radio",
@@ -2568,7 +2586,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 110,
+                        lineNumber: 131,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2577,7 +2595,7 @@ function PhotoLibrary() {
                         children: "Both"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 118,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2589,7 +2607,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 120,
+                        lineNumber: 141,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2598,7 +2616,7 @@ function PhotoLibrary() {
                         children: "Makeup"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 128,
+                        lineNumber: 149,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2610,7 +2628,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 130,
+                        lineNumber: 151,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2619,7 +2637,7 @@ function PhotoLibrary() {
                         children: "Hairstyles"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 138,
+                        lineNumber: 159,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2631,7 +2649,7 @@ function PhotoLibrary() {
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 142,
+                        lineNumber: 163,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -2640,19 +2658,19 @@ function PhotoLibrary() {
                         children: "All"
                     }, void 0, false, {
                         fileName: "src/js/PhotoLibrary.jsx",
-                        lineNumber: 150,
+                        lineNumber: 171,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/js/PhotoLibrary.jsx",
-                lineNumber: 108,
+                lineNumber: 129,
                 columnNumber: 8
             }, this)
         ]
     }, void 0, true);
 }
-_s(PhotoLibrary, "D5WIE94yibEMn67I/0caiW7VvMU=");
+_s(PhotoLibrary, "A6PuyMPgtMyLMDWO92kyOAuEii8=");
 _c = PhotoLibrary;
 exports.default = PhotoLibrary;
 var _c;

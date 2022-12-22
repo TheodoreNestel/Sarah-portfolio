@@ -20,6 +20,7 @@ function PhotoLibrary(){
     //state for keeping track of how to sort imgs 
     const [typeOfImg , setTypeOfImg] = useState('all'); //starts as both so all imgs are loaded / rendered initially
 
+    const [loading , setLoading] = useState(true) // are we loading imgs 
 
      //axios logic
 
@@ -27,25 +28,41 @@ function PhotoLibrary(){
      //and the img itself 
      async function getImgs(){
 
+
+
         //get the imgs from the backend
         const res = await axios.get("/photos")
 
 
+
+
         //grab just the values from the array the backend returns
         const arrOfImgs = Object.values(res.data.data);
-        
+        const sortImgsWithSize = new Array(arrOfImgs.length)
 
-        //formats the entries into new objects containing a file path and the type of img in two separate keys
-        const sortedArrOfImgs = arrOfImgs.map((img)=>{
-            const imgType = img.substring(0, img.indexOf('__'));
-                return {
-                    type : imgType ,
+        const cachedImgs = arrOfImgs.map((img , i)=> new Promise((resolve)=>{
+            const tempImg = new Image()
+            tempImg.onload = function(){
+                sortImgsWithSize[i]= {
+                    width : this.width,
+                    height : this.height,
+                    type : img.split("__")[0],
                     img  : `uploads/${img}`
                 }
-        })
 
+                
+                resolve()
+            }
+            tempImg.src = `uploads/${img}`;
+        }))
+
+
+        await Promise.all(cachedImgs);
+        console.log(sortImgsWithSize)
+        setLoading(false);
+        
         //then once our array of objects is ready we set it to state 
-        setImgs(sortedArrOfImgs);
+        setImgs(sortImgsWithSize);
      }
 
      //getImgs(); //this runs forever so we need to call it just once 
@@ -58,6 +75,10 @@ function PhotoLibrary(){
      //handle radio button state change for the sake of sorting 
 
      function handleChange(e){
+
+        if(!e.target.checked){ //if its not checked dont run (for initial radio button state)
+            return
+        }
        let type = e.target.value
        //console.log(type)
        setTypeOfImg(type)
@@ -67,7 +88,7 @@ function PhotoLibrary(){
      //console.log(typeOfImg)
 
     
-
+     
      
 
      
@@ -76,8 +97,8 @@ function PhotoLibrary(){
     //sorting between both  makeup and hair 
     return (
        <>
-       {
-        <div className="react-photo-library__photo-section">
+       { !loading ? 
+       ( <div className="react-photo-library__photo-section">
        <Gallery>
         {
             
@@ -88,8 +109,8 @@ function PhotoLibrary(){
                         <Item
                         original={img.img}
                         thumbnail={img.img}
-                        width="1024"
-                        height="768"
+                        width={img.width}
+                        height={img.height}
                         key={Date.now() +i}
                         >
                             {({ ref, open }) => (
@@ -102,7 +123,7 @@ function PhotoLibrary(){
             })
         }
        </Gallery>
-       </div>
+       </div>) : <p>Loading</p>
        }
 
        <div className="react-photo-library__img-sorting-radio">

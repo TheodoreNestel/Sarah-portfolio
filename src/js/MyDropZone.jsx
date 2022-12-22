@@ -58,12 +58,14 @@ function MyDropZone(){
 
         //axios logic **JUN more error handling needed here I think
 
-        console.log(myForm , "were file?")
+        
        const res = await axios.post('/upload' , myForm , {
             headers : {
                 "Content-Type" : "multipart/form-data"
             }
         })
+
+        console.log(res)
 
 
         alert("Files uploaded")
@@ -162,11 +164,11 @@ function MyDropZone(){
                                     
                                     />
 
-                                    {img.size > maxFileSize ? <h4 style={{color:'red'}}>File is too large and will not be uploaded.</h4> : ""}
+                                    {(img.size > maxFileSize) && <h4 style={{color:'red'}}>File is too large and will not be uploaded.</h4>}
 
                                 
                                 <div
-                                className={`main-dropzone__radioButtons ${img.size > maxFileSize ? "too-big-radio" : ""}`}
+                                className={`main-dropzone__radioButtons ${(img.size > maxFileSize) && "too-big-radio"}`}
                                 >
                                   
                                         <label className="main-dropzone__radio-label">
